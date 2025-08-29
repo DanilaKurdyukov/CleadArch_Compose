@@ -17,6 +17,8 @@ converter-gson = "3.0.0"
 
 hilt = "2.51.1"
 
+navigationCompose = "2.9.3"
+
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -41,6 +43,9 @@ converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
 hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version = "1.2.0" }
+
+androidx-navigation-compose = {module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose"}
+
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
