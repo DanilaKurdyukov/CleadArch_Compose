@@ -4,17 +4,43 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import com.example.cleanarchapp.presentation.ui.theme.CleanArchAppTheme
+import com.example.cleanarchapp.presentation.ui.view.CardItem
 
 class MainActivity : ComponentActivity() {
+    @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
             CleanArchAppTheme {
-               /* Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                Scaffold(
+                    modifier = Modifier.fillMaxSize(),
+                    topBar = {
+                        TopAppBar(
+                            title = {
+                                Text(
+                                    text = "News API"
+                                )
+                            }/*,
+                        colors = TopAppBarDefaults.topAppBarColors(
+                            containerColor = blackViolet
+                        )*/
+                        )
+                    }
 
-                }*/
+                ) { innerPadding ->
+                    CardItem(modifier = Modifier.padding(paddingValues = innerPadding))
+                }
             }
         }
     }

@@ -41,6 +41,6 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideApiService(apiService: ApiService): ArticleRepository =
+    fun provideArticleRepository(apiService: ApiService): ArticleRepository =
         ArticleRepositoryImlp(apiService)
 }
