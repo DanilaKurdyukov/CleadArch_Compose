@@ -1,6 +1,7 @@
 package com.example.cleanarchapp.presentation.ui.view
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -12,12 +13,11 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
-import com.example.cleanarchapp.R
+import androidx.constraintlayout.compose.Dimension.Companion.fillToConstraints
 import com.example.cleanarchapp.domain.model.Article
 
 @Composable
@@ -40,46 +40,44 @@ fun CardItem(article: Article) {
                 .padding(all = 10.dp)
         ) {
             val horizontalGuideline = createGuidelineFromTop(offset = 30.dp)
-            val verticalGuideline = createGuidelineFromEnd(offset = 30.dp)
+            val verticalGuideline = createGuidelineFromEnd(offset = 100.dp)
             val (txtTitle, txtDescription, txtPublishedAt, txtAuthor, imgNewsImage) = createRefs()
             Text(
                 modifier = Modifier.constrainAs(ref = txtTitle) {
                     top.linkTo(anchor = parent.top)
                     start.linkTo(anchor = parent.start)
                 },
-                text = article.title ?: ""
+                text = article.title ?: "",
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
             )
             Text(
-                modifier = Modifier.constrainAs(ref = txtDescription) {
-                    top.linkTo(anchor = txtTitle.bottom)
-                },
-                text = article.description ?: ""
+                modifier = Modifier
+                    .constrainAs(ref = txtDescription) {
+                        top.linkTo(txtTitle.bottom, margin = 5.dp)
+                        start.linkTo(parent.start)
+                        end.linkTo(imgNewsImage.start, margin = 8.dp)
+                        width = fillToConstraints
+                    },
+                text = article.description ?: "",
+                maxLines = 3,
+                overflow = TextOverflow.Ellipsis
             )
             Text(
                 modifier = Modifier.constrainAs(ref = txtPublishedAt) {
                     top.linkTo(anchor = txtDescription.bottom)
                     start.linkTo(anchor = parent.start)
-                },
+                }.padding(top = 5.dp),
                 text = article.publishedAt ?: ""
             )
             Text(
                 modifier = Modifier.constrainAs(ref = txtAuthor) {
                     top.linkTo(anchor = txtPublishedAt.bottom)
-                },
-                text = article.author ?: ""
+                }.padding(top = 5.dp),
+                text = article.author ?: "",
+                fontSize = 18.sp
             )
-            Image(
-                modifier = Modifier
-                    .clip(CircleShape)
-                    .size(50.dp)
-                    .constrainAs(ref = imgNewsImage) {
-                        top.linkTo(anchor = horizontalGuideline)
-                        bottom.linkTo(anchor = txtAuthor.top)
-                        end.linkTo(anchor = verticalGuideline)
-                    },
-                contentDescription = "News image",
-                imageVector = ImageVector.vectorResource(id = R.drawable.outline_emoji_people_24)
-            )
+
         }
     }
 }

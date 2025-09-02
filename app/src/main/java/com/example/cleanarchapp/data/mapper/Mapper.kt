@@ -20,7 +20,7 @@ fun ArticleDto.toDomain(): Article =
         description = description,
         url = url,
         imageUrl = urlToImage,
-        publishedAt = publishedAt
+        publishedAt = publishedAt.split("T")[0]
     )
 
 fun NewsDto.toDomain(): News =
