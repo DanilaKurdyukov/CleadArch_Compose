@@ -13,17 +13,14 @@ class ArticleRepositoryImlp @Inject constructor(
     private val apiService: ApiService
 ): ArticleRepository {
 
-    override suspend fun get(): Result<Flow<List<Article>>> {
-        return try {
-            val response = flow {
-                val data = apiService.getNews(country = "us",apiKey = "84c0e6086e184731bfa47302fad0ab65")
-                emit(value = data.articles.map { it.toDomain() })
-            }
-            Result.success(value = response)
+    override suspend fun get(): Flow<Result<List<Article>>> = flow{
+        try {
+            val data = apiService.getNews(country = "us", apiKey = "...")
+            emit(Result.success(data.articles.map { it.toDomain() }))
         } catch (e: IOException) {
-            Result.failure(e)
+            emit(Result.failure(e))
         } catch (e: Exception) {
-            Result.failure(e)
+            emit(Result.failure(e))
         }
     }
 }
