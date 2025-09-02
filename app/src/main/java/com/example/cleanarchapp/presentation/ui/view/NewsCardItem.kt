@@ -31,12 +31,15 @@ fun CardItem(modifier: Modifier) {
             .padding(bottom = 10.dp, start = 10.dp, end = 10.dp),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surface
+        ),
+        elevation = CardDefaults.cardElevation(
+            defaultElevation = 3.dp
         )
     ) {
         ConstraintLayout(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(all = 5.dp)
+                .padding(all = 10.dp)
         ) {
             val horizontalGuideline = createGuidelineFromTop(offset = 30.dp)
             val verticalGuideline = createGuidelineFromEnd(offset = 30.dp)

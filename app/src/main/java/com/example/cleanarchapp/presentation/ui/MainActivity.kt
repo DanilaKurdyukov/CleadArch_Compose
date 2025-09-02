@@ -4,16 +4,20 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import com.example.cleanarchapp.presentation.ui.theme.CleanArchAppTheme
+import com.example.cleanarchapp.presentation.ui.theme.backgroundDark
+import com.example.cleanarchapp.presentation.ui.theme.surfaceDark
+import com.example.cleanarchapp.presentation.ui.theme.surfaceLight
 import com.example.cleanarchapp.presentation.ui.view.CardItem
 
 class MainActivity : ComponentActivity() {
@@ -31,10 +35,10 @@ class MainActivity : ComponentActivity() {
                                 Text(
                                     text = "News API"
                                 )
-                            }/*,
+                            },
                         colors = TopAppBarDefaults.topAppBarColors(
-                            containerColor = blackViolet
-                        )*/
+                            containerColor = MaterialTheme.colorScheme.background
+                        )
                         )
                     }
 
