@@ -1,12 +1,10 @@
 package com.example.cleanarchapp.presentation.ui.view
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -15,17 +13,17 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.example.cleanarchapp.R
+import com.example.cleanarchapp.domain.model.Article
 
 @Composable
-fun CardItem(modifier: Modifier) {
+fun CardItem(article: Article) {
     Card(
-        modifier = modifier
+        modifier = Modifier
             .fillMaxWidth()
             .wrapContentHeight()
             .padding(bottom = 10.dp, start = 10.dp, end = 10.dp),
@@ -49,26 +47,26 @@ fun CardItem(modifier: Modifier) {
                     top.linkTo(anchor = parent.top)
                     start.linkTo(anchor = parent.start)
                 },
-                text = "Title"
+                text = article.title ?: ""
             )
             Text(
                 modifier = Modifier.constrainAs(ref = txtDescription) {
                     top.linkTo(anchor = txtTitle.bottom)
                 },
-                text = "Description"
+                text = article.description ?: ""
             )
             Text(
                 modifier = Modifier.constrainAs(ref = txtPublishedAt) {
                     top.linkTo(anchor = txtDescription.bottom)
                     start.linkTo(anchor = parent.start)
                 },
-                text = "Mon, 01 Sep 2025"
+                text = article.publishedAt ?: ""
             )
             Text(
                 modifier = Modifier.constrainAs(ref = txtAuthor) {
                     top.linkTo(anchor = txtPublishedAt.bottom)
                 },
-                text = "Annie Kelly"
+                text = article.author ?: ""
             )
             Image(
                 modifier = Modifier

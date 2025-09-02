@@ -26,8 +26,8 @@ class ArticleViewModel @Inject constructor(
         viewModelScope.launch {
             repository.get().collectLatest { result ->
                 result.onSuccess {
-                    articles -> _articles.value = articles
-                }.onFailure { error ->  _error.value = error?.message ?: "Unknown error"}
+                    data -> _articles.value = data.toList()
+                }.onFailure { data ->  _error.value = data?.message ?: "Unknown error"}
             }
         }
     }

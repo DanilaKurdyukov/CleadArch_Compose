@@ -15,7 +15,7 @@ class ArticleRepositoryImlp @Inject constructor(
 
     override suspend fun get(): Flow<Result<List<Article>>> = flow{
         try {
-            val data = apiService.getNews(country = "us", apiKey = "...")
+            val data = apiService.getNews(country = "us", apiKey = "84c0e6086e184731bfa47302fad0ab65")
             emit(Result.success(data.articles.map { it.toDomain() }))
         } catch (e: IOException) {
             emit(Result.failure(e))
