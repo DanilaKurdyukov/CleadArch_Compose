@@ -1,5 +1,6 @@
 package com.example.cleanarchapp.data.repository
 
+import coil3.network.HttpException
 import com.example.cleanarchapp.data.mapper.toDomain
 import com.example.cleanarchapp.data.network.ApiService
 import com.example.cleanarchapp.domain.model.Article
@@ -19,7 +20,7 @@ class ArticleRepositoryImlp @Inject constructor(
             emit(Result.success(data.articles.map { it.toDomain() }))
         } catch (e: IOException) {
             emit(Result.failure(e))
-        } catch (e: Exception) {
+        } catch (e: retrofit2.HttpException) {
             emit(Result.failure(e))
         }
     }

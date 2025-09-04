@@ -20,7 +20,8 @@ private val DarkColorScheme = darkColorScheme(
     onPrimary = onBluePrimaryDark,
     onSecondary = onBlueSecondaryDark,
     onTertiary = onTealTertiaryDark,
-    onSurface = onSurfaceDark
+    onSurface = onSurfaceDark,
+    primaryContainer = snackbarContainerDark
 )
 
 private val LightColorScheme = lightColorScheme(
@@ -33,7 +34,9 @@ private val LightColorScheme = lightColorScheme(
     onPrimary = onBluePrimary,
     onSecondary = onBlueSecondary,
     onTertiary = onTealTertiary,
-    onSurface = onSurfaceLight
+    onSurface = onSurfaceLight,
+    primaryContainer = snackbarContainerLight
+
 )
 
 @Composable

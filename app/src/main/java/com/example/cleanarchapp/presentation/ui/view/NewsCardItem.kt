@@ -46,8 +46,6 @@ fun CardItem(article: Article) {
                 .fillMaxWidth()
                 .padding(all = 10.dp)
         ) {
-            val horizontalGuideline = createGuidelineFromTop(offset = 30.dp)
-            val verticalGuideline = createGuidelineFromEnd(offset = 100.dp)
             val (txtTitle, txtDescription, txtPublishedAt, txtAuthor, imgNewsImage) = createRefs()
             Text(
                 modifier = Modifier.constrainAs(ref = txtTitle) {
@@ -86,6 +84,7 @@ fun CardItem(article: Article) {
             )
             AsyncImage(
                 modifier = Modifier.constrainAs(imgNewsImage) {
+                    top.linkTo(anchor = parent.top)
                     bottom.linkTo(anchor = parent.bottom)
                     end.linkTo(anchor = parent.end)
                 }.width(110.dp).height(110.dp),
