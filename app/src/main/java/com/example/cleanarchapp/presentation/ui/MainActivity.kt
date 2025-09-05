@@ -22,9 +22,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.cleanarchapp.presentation.ui.theme.CleanArchAppTheme
 import com.example.cleanarchapp.presentation.ui.view.CardItem
 import com.example.cleanarchapp.presentation.ui.view.NewsScreen
+import com.example.cleanarchapp.presentation.ui.view.SearchAppBar
+import com.example.cleanarchapp.presentation.vm.ArticleViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -36,19 +40,25 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             CleanArchAppTheme {
+
+                val articleViewModel: ArticleViewModel = hiltViewModel()
+
+                val isSearching = articleViewModel.isSearching.collectAsStateWithLifecycle()
+                val searchQuery = articleViewModel.searchText.collectAsStateWithLifecycle()
+
                 val snackbarHostState = remember { SnackbarHostState() }
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
                     topBar = {
-                        TopAppBar(
-                            title = {
-                                Text(
-                                    text = "News API"
-                                )
+                        SearchAppBar(
+                            isSearching = isSearching.value,
+                            searchQuery = searchQuery.value,
+                            onSearchQueryChange = {
+                                articleViewModel.onSearchTextChange(it)
                             },
-                        colors = TopAppBarDefaults.topAppBarColors(
-                            containerColor = MaterialTheme.colorScheme.background
-                        )
+                            onToggleSearch = {
+                                articleViewModel.setSearching(!isSearching.value)
+                            }
                         )
                     },
                     snackbarHost = {
